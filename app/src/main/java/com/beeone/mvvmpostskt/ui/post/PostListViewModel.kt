@@ -2,6 +2,7 @@ package com.beeone.mvvmpostskt.ui.post
 
 import android.arch.lifecycle.MutableLiveData
 import android.view.View
+import com.beeone.mvvmpostskt.R
 import com.beeone.mvvmpostskt.base.BaseViewModel
 import com.beeone.mvvmpostskt.network.PostApi
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -64,7 +65,7 @@ class PostListViewModel: BaseViewModel(){
 
     // ...
 
-    private fun onRetrievePostListStart(){
+   /* private fun onRetrievePostListStart(){
         loadingVisibility.value = View.VISIBLE
     }
 
@@ -78,6 +79,31 @@ class PostListViewModel: BaseViewModel(){
 
     private fun onRetrievePostListError(){
 
+    }
+*/
+
+
+    // ...
+    val errorMessage:MutableLiveData<Int> = MutableLiveData()
+    val errorClickListener = View.OnClickListener { loadPosts() }
+
+    // ...
+
+    private fun onRetrievePostListStart(){
+        loadingVisibility.value = View.VISIBLE
+        errorMessage.value = null
+    }
+
+    private fun onRetrievePostListFinish(){
+        loadingVisibility.value = View.GONE
+    }
+
+    private fun onRetrievePostListSuccess(){
+
+    }
+
+    private fun onRetrievePostListError(){
+        errorMessage.value = R.string.post_error
     }
 
 }
